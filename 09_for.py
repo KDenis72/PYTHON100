@@ -1,19 +1,48 @@
 # Задание 1 вариант 1
-def init_lst(n1):
-    lstPos1 = [0 if i > 1 else 1 for i in range(n1)]
+def init_lst(nn1, n1):
+    lstPos1 = [1 for _ in range(nn1)]
 
-    for i in range(2, n1):
-        lstPos1[i] = lstPos1[i - 2] + lstPos1[i - 1]
+    for i in range(nn1, n1):
+        ss = 0
+        for j in range(i - nn1, i):
+            ss += lstPos1[j]
+        lstPos1.append(ss)
 
     return lstPos1
 
 
-#print('Введите номер элемента последовательности: ', end='')
-#n = int(input())
-#print('')
-#lstPos = init_lst(n)
+# Задание 1 вариант 1_1
+def init_lst1(nn1, n1):
+    lstPos1 = [1 for _ in range(nn1)]
 
-#print(lstPos[n-1])
+    for _ in range(n1 - nn1):
+        ss = 0
+        for j in range(-nn1, 0):
+            ss += lstPos1[j]
+        lstPos1.append(ss)
+
+    return lstPos1
+
+
+# Задание 1 вариант 1_2
+def init_lst2(nn1, n1):
+    lstPos1 = [1 for _ in range(nn1)]
+
+    for _ in range(n1 - nn1):
+        lstPos1.append(sum(lstPos1[-nn1:]))
+
+    return lstPos1
+
+
+# print('Введите NN: ', end='')
+# nn = int(input())
+# print('')
+# print('Введите номер элемента последовательности: ', end='')
+# n = int(input())
+# print('')
+# lstPos = init_lst2(nn, n)
+#
+# print(lstPos[n-1])
 # _____________________________
 
 # Задание 1 вариант 2 и 3
@@ -103,14 +132,43 @@ def kv_nech_num2(n1):
 # print('')
 # print(kv_nech_num2(n))
 
-# Задание 4
-def paint_kv(a1, b1, ch1):
-    print(ch1 * a1)
+# Задание 4 вариант 1
+def paint_kv(a1, b1, d1, ch1='*'):
+    s1 = ch1 * a1 + '\n'
 
-    for i in range(2, b1):
-        print(ch1 + ' ' * (a1-2) + ch1)
+    if d1 >= b1:
+        s = s1 * b1
+    else:
+        s = ''
+        for _ in range(d1):
+            s += s1
 
-    print(ch1 * a1)
+        for _ in range(b1 - d1 * 2):
+            if d1 >= a1:
+                s += s1
+            else:
+                s += ch1 * d1 + ' ' * (a1 - 2 * d1) + ch1 * d1 + '\n'
+
+        for _ in range(d1):
+            s += s1
+
+    return s
+
+
+# Задание 4 вариант 2
+def paint_kv2(a1, b1, d1, ch1='*'):
+    s1 = ch1 * a1 + '\n'
+
+    if d1 >= b1 or d1 >= a1:
+        s = s1 * b1
+    else:
+        s = s1 * d1
+
+        s += (ch1 * d1 + ' ' * (a1 - 2 * d1) + ch1 * d1 + '\n') * (b1 - d1 * 2)
+
+        s += s1 * d1
+
+    return s
 
 
 # print('Введите A: ', end='')
@@ -121,7 +179,11 @@ def paint_kv(a1, b1, ch1):
 # b = int(input())
 # print('')
 #
-# paint_kv(a, b, '*')
+# print('Введите D: ', end='')
+# d = int(input())
+# print('')
+#
+# print(paint_kv2(a, b, d, '*'))
 
 # Задание 5
 def s_nat(a1, b1):

@@ -3,10 +3,6 @@
 import random as rnd
 
 
-def initdatapart():
-    return rnd.randint(1, 100), 50
-
-
 def vvod_p_n():
     blnKl = True
     while blnKl:
@@ -21,9 +17,10 @@ def vvod_p_n():
     return intNum
 
 
-def partn(num_x, vsego_h):
+def partn(num_x, vsego_h, tek_hod):
     kolendpart = 0
-    for i in range(vsego_h):
+    while tek_hod <= vsego_h:
+        tek_hod += 1
         intNumP = vvod_p_n()
         if intNumP < num_x:
             print('Ваше число меньше загаданного!!!')
@@ -33,18 +30,26 @@ def partn(num_x, vsego_h):
             print('Да, это оно!!!')
             kolendpart = 1
             break
-    return kolendpart
+        print('')
+    return kolendpart, tek_hod
 
 
 rnd.seed()
 intKolEndPart = 0
 intVsegoPart = 0
+intVsegoH = 50
+intTekHod = 0
 blnKl = True
 
 while blnKl:
-    intNumX, intVsegoH = initdatapart()
-    intKolEndPart += partn(intNumX, intVsegoH)
+    intNumX = rnd.randint(1, 100)
+    intKolEndPartT, intTekHodT = partn(intNumX, intVsegoH, intTekHod)
+    intKolEndPart += intKolEndPartT
+    intTekHod = intTekHodT
     intVsegoPart += 1
+    if intTekHod >= intVsegoH:
+        break
+
     print('Хотите сыграть еще? (y/n) ', end='')
     chOtv = input()
     if chOtv != 'y':
