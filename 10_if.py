@@ -34,28 +34,33 @@ def partn(num_x, vsego_h, tek_hod):
     return kolendpart, tek_hod
 
 
-rnd.seed()
-intKolEndPart = 0
-intVsegoPart = 0
-intVsegoH = 50
-intTekHod = 0
-blnKl = True
+def game_proc():
+    rnd.seed()
+    intKolEndPart = 0
+    intVsegoPart = 0
+    intVsegoH = 50
+    intTekHod = 0
+    blnKl = True
 
-while blnKl:
-    intNumX = rnd.randint(1, 100)
-    intKolEndPartT, intTekHodT = partn(intNumX, intVsegoH, intTekHod)
-    intKolEndPart += intKolEndPartT
-    intTekHod = intTekHodT
-    intVsegoPart += 1
-    if intTekHod >= intVsegoH:
-        break
+    while blnKl:
+        intNumX = rnd.randint(1, 100)
+        intKolEndPartT, intTekHodT = partn(intNumX, intVsegoH, intTekHod)
+        intKolEndPart += intKolEndPartT
+        intTekHod = intTekHodT
+        intVsegoPart += 1
+        if intTekHod >= intVsegoH:
+            break
 
-    print('Хотите сыграть еще? (y/n) ', end='')
-    chOtv = input()
-    if chOtv != 'y':
-        blnKl = False
+        print('Хотите сыграть еще? (y/n) ', end='')
+        chOtv = input()
+        if chOtv.lower() != 'y':
+            blnKl = False
 
-print('Всего партий - ' + str(intVsegoPart))
-print('Всего оконченных партий - ' + str(intKolEndPart))
+    return intVsegoPart, intKolEndPart
+
+
+intgVsegoPart, intgKolEndPart = game_proc()
+print('Всего партий - ' + str(intgVsegoPart))
+print('Всего оконченных партий - ' + str(intgKolEndPart))
 
 #***************************************************
